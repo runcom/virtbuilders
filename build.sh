@@ -6,7 +6,7 @@ case $1 in
 		dist="fedora-23"
 		# using fedora22 as os-variant becuse virt-install ins't updatd yet probably and errors out
 		osvariant="fedora22"
-		run=" --run rawhide/torawhide.sh"
+		run="$RUN --run rawhide/torawhide.sh"
 		options="$OPTS --selinux-relabel"
 		;;
 	*)
