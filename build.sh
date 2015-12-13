@@ -29,7 +29,6 @@ case $1 in
 		osvariant="fedora22"
 		run="$RUN --run rawhide/torawhide.sh"
 		options="$OPTS --selinux-relabel"
-		hostname=${HOSTNAME:-rawhide}
 		;;
 	*)
 		echo "os not supported"
@@ -37,5 +36,7 @@ case $1 in
 		;;
 esac
 
-virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password --update $options --size 10G $run --hostname $hostname
+virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password --update $options --size 10G $run --hostname $name
+
+# TODO(runcom): how do I connect to the vm from my host? using bridge ip doesn't work running a simple golang http web server..
 virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
