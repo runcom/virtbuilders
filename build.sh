@@ -30,13 +30,24 @@ case $1 in
 		run="$RUN --run rawhide/torawhide.sh"
 		options="$OPTS --selinux-relabel"
 		;;
+	debian)
+		is_available debian
+		check_root debian
+		name=${OSNAME:-debian}
+		root_password=${PASSWORD:-debian}
+		dist="debian-8"
+		osvariant="debian8"
+		# can't run this cause debian isn't booting with a tty and everything is stuck...
+		# running this manually then..
+		#run="$RUN --run debian/totesting.sh"
+		;;
 	*)
 		echo "os not supported"
 		exit
 		;;
 esac
 
-virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password --update $options --size 10G $run --hostname $name
+virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size 10G $run --hostname $name
 
 # TODO(runcom): how do I connect to the vm from my host? using bridge ip doesn't work running a simple golang http web server..
 virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
