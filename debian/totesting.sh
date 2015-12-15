@@ -2,7 +2,7 @@
 sed -i 's/jessie/testing/g' /etc/apt/sources.list
 apt-get -y update && APT_LISTCHANGES_FRONTEND=none apt-get -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" dist-upgrade
 apt-get -y autoremove && apt-get -y clean
-apt-get -y install vim apt-transport-https
+apt-get -y install vim golang apt-transport-https
 systemctl enable getty@ttyS0
 
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
