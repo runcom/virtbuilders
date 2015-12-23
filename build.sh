@@ -53,6 +53,7 @@ virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_
 virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
 
 # fedora atomic
+# XXX: JUST BOOT INTO DEV MODE???
 #
 # $ cat - > meta-data <<"EOF"
 #   instance-id: atomic-host001
@@ -88,3 +89,5 @@ virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk pa
 #   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
 
 # virt-install --name rhel72-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-atomic-cloud-7.2-10.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel-atomic-7.0 --nographics --import
+#
+#
