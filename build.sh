@@ -71,4 +71,4 @@ virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk pa
 # $ virt-install --name fedora-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=Fedora-Cloud-Atomic-23-20151215.x86_64.qcow2,format=qcow2,cache=writeback --nographics --os-variant fedora22 --disk path=init.iso,device=cdrom,readonly=on --import
 
 # RHEL
-#virt-install --name rhel72-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-atomic-cloud-7.2-10.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso --os-variant=rhel-atomic-7.0 --no-graphics --import
+#virt-install --name rhel72-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-atomic-cloud-7.2-10.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel-atomic-7.0 --nographics --import
