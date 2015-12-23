@@ -51,3 +51,21 @@ virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_
 
 # TODO(runcom): how do I connect to the vm from my host? using bridge ip doesn't work running a simple golang http web server..
 virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
+
+# fedora atomic
+#
+# $ cat - > meta-data <<"EOF"
+#   instance-id: atomic-host001
+#   local-hostname: atomic01.example.org
+# $ cat - > user-data <<"EOF"
+#   #cloud-config
+#   password: atomic
+#   ssh_pwauth: True
+#   chpasswd: { expire: False  }
+#
+#   #ssh_authorized_keys:
+#   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
+#
+# $ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data
+#
+# $ virt-install --name fedora-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=Fedora-Cloud-Atomic-23-20151215.x86_64.qcow2,format=qcow2,cache=writeback --nographics --os-variant fedora22 --disk path=init.iso --import
