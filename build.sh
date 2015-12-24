@@ -78,12 +78,9 @@ virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk pa
 #   local-hostname: atomic01.example.org
 # $ cat - > user-data <<"EOF"
 #   #cloud-config
+#   password: atomic
 #   ssh_pwauth: True
-# chpasswd:
-#   list: |
-#     root:password
-#     cloud-user:atomic
-#   expire: False
+#   chpasswd: { expire: False  }
 #
 #   #ssh_authorized_keys:
 #   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
@@ -94,4 +91,17 @@ virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk pa
 #
 
 # RHEL
+
+# $ cat - > meta-data <<"EOF"
+#   instance-id: rhel-host001
+#   local-hostname: rhel01.example.org
+# $ cat - > user-data <<"EOF"
+#   #cloud-config
+#   password: rhel
+#   ssh_pwauth: True
+#   chpasswd: { expire: False  }
+#
+#   #ssh_authorized_keys:
+#   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
+
 # virt-install --name rhel72 --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-guest-image-7.2-20151102.0.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel7.0 --nographics --import
