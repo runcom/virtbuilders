@@ -105,3 +105,8 @@ virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk pa
 #   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
 
 # virt-install --name rhel72 --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-guest-image-7.2-20151102.0.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel7.0 --nographics --import
+
+# enable extras for Docker!
+#
+# subscription-manager repos --enable rhel-7-server-extras-rpms
+# yum update && yum install docker
