@@ -25,4 +25,12 @@ AUTO_GOPATH=1 BUILDFLAGS="-race" DOCKER_BUILDTAGS="experimental selinux journald
 EOF'
 chmod +x /root/build-docker.sh
 
+sh -c 'cat >/etc/yum.repos.d/koji.repo <<-EOF
+[koji]
+name=Koji Repository
+baseurl=http://kojipkgs.fedoraproject.org/repos/f\$releasever-build/latest/\$basearch/
+enabled=0
+gpgcheck=0
+EOF'
+
 reboot
