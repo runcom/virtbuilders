@@ -28,7 +28,7 @@ chmod +x /root/build-docker.sh
 sh -c 'cat >/etc/yum.repos.d/koji.repo <<-EOF
 [koji]
 name=Koji Repository
-baseurl=http://kojipkgs.fedoraproject.org/repos/f\$releasever-build/latest/\$basearch/
+baseurl=http://kojipkgs.fedoraproject.org/repos/rawhide/latest/\$basearch/
 enabled=0
 gpgcheck=0
 EOF'
