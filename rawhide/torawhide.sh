@@ -5,7 +5,7 @@ dnf --releasever=rawhide distro-sync -y --nogpgcheck
 
 # installing stuff I need while hacking on docker
 dnf update -y
-dnf install -y vim-enhanced docker golang git glibc-static systemd-devel device-mapper-devel audit-libs-devel
+dnf install -y fedora-packager vim-enhanced docker golang git glibc-static systemd-devel device-mapper-devel audit-libs-devel
 systemctl enable docker
 git clone https://github.com/runcom/docker /root/docker
 cd /root/docker \
