@@ -1,4 +1,3 @@
-# installing stuff I need while hacking on docker
 dnf update -y
 dnf install -y docker golang glibc-static systemd-devel device-mapper-devel audit-libs-devel
 systemctl enable docker
