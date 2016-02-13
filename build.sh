@@ -26,8 +26,11 @@ case $1 in
 		root_password=${PASSWORD:-rawhide}
 		dist="fedora-23"
 		# using fedora22 as os-variant becuse virt-install ins't updatd yet probably and errors out
-		osvariant="fedora23"
+		osvariant="fedora22"
 		run="$RUN --run rawhide/torawhide.sh"
+		if [ -n "$STUFF" ]; then
+			run2="$RUN --run rawhide/stuff.sh"
+		fi
 		options="$OPTS --selinux-relabel"
 		;;
 	debian)
@@ -48,7 +51,7 @@ case $1 in
 esac
 
 # libguestfs-xfs.x86_64 is needed for --size on my f23
-virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size 10G $run --hostname $name
+virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size 10G $run $run2 --hostname $name
 
 # TODO(runcom): how do I connect to the vm from my host? using bridge ip doesn't work running a simple golang http web server..
 virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
