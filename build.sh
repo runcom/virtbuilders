@@ -20,9 +20,9 @@ check_root() {
 
 case $1 in
 	rawhide)
-		is_available rawhide
-		check_root rawhide
 		name=${OSNAME:-rawhide}
+		is_available $name
+		check_root $name
 		root_password=${PASSWORD:-rawhide}
 		dist="fedora-23"
 		# using fedora22 as os-variant becuse virt-install ins't updatd yet probably and errors out
@@ -31,9 +31,9 @@ case $1 in
 		options="$OPTS --selinux-relabel"
 		;;
 	debian)
-		is_available debian
-		check_root debian
 		name=${OSNAME:-debian}
+		is_available $name
+		check_root $name
 		root_password=${PASSWORD:-debian}
 		dist="debian-8"
 		osvariant="debian8"
