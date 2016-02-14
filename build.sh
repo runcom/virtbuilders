@@ -19,6 +19,17 @@ check_root() {
 }
 
 case $1 in
+	f23)
+		name=${OSNAME:-f23}
+		is_available $name
+		check_root $name
+		root_password=${PASSWORD:-f23}
+		dist="fedora-23"
+		# using fedora22 as os-variant becuse virt-install ins't updatd yet probably and errors out
+		run="$RUN --run basic_fedora.sh"
+		osvariant="fedora22"
+		options="$OPTS --selinux-relabel"
+		;;
 	rawhide)
 		name=${OSNAME:-rawhide}
 		is_available $name
@@ -27,7 +38,8 @@ case $1 in
 		dist="fedora-23"
 		# using fedora22 as os-variant becuse virt-install ins't updatd yet probably and errors out
 		osvariant="fedora22"
-		run="$RUN --run rawhide/torawhide.sh"
+		run="$RUN --run basic_fedora.sh"
+		run="$run --run rawhide/torawhide.sh"
 		if [ -n "$STUFF" ]; then
 			run="$run --run rawhide/stuff.sh"
 		fi
