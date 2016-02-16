@@ -1,3 +1,4 @@
+dnf config-manager --set-enabled updates-testing
 dnf update -y
 dnf install -y vim-enhanced git
 sh -c 'cat >/etc/yum.repos.d/koji.repo <<-EOF
