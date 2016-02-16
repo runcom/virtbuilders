@@ -21,6 +21,7 @@ check_root() {
 case $1 in
 	f23)
 		name=${OSNAME:-f23}
+		size=${SIZE:-32G}
 		is_available $name
 		check_root $name
 		root_password=${PASSWORD:-f23}
@@ -32,6 +33,7 @@ case $1 in
 		;;
 	rawhide)
 		name=${OSNAME:-rawhide}
+		size=${SIZE:-32G}
 		is_available $name
 		check_root $name
 		root_password=${PASSWORD:-rawhide}
@@ -47,6 +49,7 @@ case $1 in
 		;;
 	debian)
 		name=${OSNAME:-debian}
+		size=${SIZE:-32G}
 		is_available $name
 		check_root $name
 		root_password=${PASSWORD:-debian}
@@ -63,7 +66,7 @@ case $1 in
 esac
 
 # libguestfs-xfs.x86_64 is needed for --size on my f23
-virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size 10G $run --hostname $name
+virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size $size $run --hostname $name
 
 # TODO(runcom): how do I connect to the vm from my host? using bridge ip doesn't work running a simple golang http web server..
 virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
