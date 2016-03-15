@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# using sudo so I can use vibr0 for nat...the default network does not work with unprivileged users :(
+# using sudo so I can use virbr0 for nat...the default network does not work with unprivileged users :(
 
 is_available() {
 	available=( $(sudo virsh list --all --name) )
@@ -70,8 +70,8 @@ esac
 # libguestfs-xfs.x86_64 is needed for --size on my f23
 sudo virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size $size $run --hostname $name
 
-# TODO(runcom): how do I connect to the vm from my host? using bridge ip doesn't work running a simple golang http web server..
-sudo virt-install --name $name --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
+# is network=default really needed????? --network network=default
+sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
 
 # fedora atomic
 # XXX: JUST BOOT INTO DEV MODE???
