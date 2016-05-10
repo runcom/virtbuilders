@@ -27,9 +27,10 @@ case $1 in
 		is_available $name
 		check_root $name
 		root_password=${PASSWORD:-ubuntu}
-		ver=${UBUNTUVER:-16.04}
+		ver=${UBUNTUVER:-14.04}
 		dist="ubuntu-$ver"
-		osvariant="ubuntu-$ver"
+		# TODO: ubuntu16.04 doesn't exist into osinfo-query os so use ubuntu14.04 (always)
+		osvariant="ubuntu14.04"
 		;;
 	f23)
 		name=${OSNAME:-f23}
