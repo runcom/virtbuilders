@@ -29,8 +29,11 @@ case $1 in
 		root_password=${PASSWORD:-ubuntu}
 		ver=${UBUNTUVER:-14.04}
 		dist="ubuntu-$ver"
-		# TODO: ubuntu16.04 doesn't exist into osinfo-query os so use ubuntu14.04 (always)
-		osvariant="ubuntu14.04"
+		# TODO: ubuntu16.04 doesn't exist into osinfo-query os for instance and doesn't start uff
+		if [ "$ver" != "14.04" ]; then
+			ver="15.10"
+		fi
+		osvariant="ubuntu$ver"
 		;;
 	f23)
 		name=${OSNAME:-f23}
