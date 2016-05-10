@@ -21,6 +21,16 @@ check_root() {
 }
 
 case $1 in
+	ubuntu)
+		name=${OSNAME:-ubuntu}
+		size=${SIZE:-32G}
+		is_available $name
+		check_root $name
+		root_password=${PASSWORD:-ubuntu}
+		ver=${UBUNTUVER:-16.04}
+		dist="ubuntu-$ver"
+		osvariant="ubuntu-$ver"
+		;;
 	f23)
 		name=${OSNAME:-f23}
 		size=${SIZE:-32G}
