@@ -145,3 +145,5 @@ sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,form
 #
 # subscription-manager repos --enable rhel-7-server-extras-rpms
 # yum update && yum install docker
+
+# XXX: get a list of os-variant(s): osinfo-query os
