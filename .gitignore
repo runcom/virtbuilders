@@ -1,1 +1,4 @@
 *.qcow2
+meta-data
+user-data
+init.iso

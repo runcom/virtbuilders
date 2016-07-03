@@ -84,7 +84,6 @@ esac
 # libguestfs-xfs.x86_64 is needed for --size on my f23
 sudo virt-builder $dist -o $name.qcow2 --format qcow2 --root-password password:$root_password $options --size $size $run --hostname $name
 
-# is network=default really needed????? --network network=default
 sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --import
 
 # fedora atomic
@@ -104,7 +103,7 @@ sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,form
 #
 # $ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data
 #
-# $ virt-install --name fedora-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=Fedora-Cloud-Atomic-23-20151215.x86_64.qcow2,format=qcow2,cache=writeback --nographics --os-variant fedora22 --disk path=init.iso,device=cdrom,readonly=on --import
+# $ virt-install --name fedora-atomic --ram 2048 --vcpus=2 --disk path=Fedora-Cloud-Atomic-23-20151215.x86_64.qcow2,format=qcow2,cache=writeback --nographics --os-variant fedora22 --disk path=init.iso,device=cdrom,readonly=on --import
 
 # RHEL atomic
 
@@ -120,7 +119,7 @@ sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,form
 #   #ssh_authorized_keys:
 #   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
 
-# virt-install --name rhel72-atomic --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-atomic-cloud-7.2-10.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel-atomic-7.0 --nographics --import
+# virt-install --name rhel72-atomic --ram 2048 --vcpus=2 --disk path=rhel-atomic-cloud-7.2-10.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel-atomic-7.0 --nographics --import
 #
 #
 #
@@ -139,7 +138,7 @@ sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,form
 #   #ssh_authorized_keys:
 #   #  - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
 
-# virt-install --name rhel72 --ram 2048 --vcpus=2 --network bridge=virbr0 --disk path=rhel-guest-image-7.2-20151102.0.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel7.0 --nographics --import
+# virt-install --name rhel72 --ram 2048 --vcpus=2 --disk path=rhel-guest-image-7.2-20151102.0.x86_64.qcow2,format=qcow2,cache=writeback --disk path=init.iso,device=cdrom,readonly=on --os-variant=rhel7.0 --nographics --import
 
 # enable extras for Docker!
 #
