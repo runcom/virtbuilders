@@ -143,7 +143,10 @@ sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=$name.qcow2,form
 # enable extras for Docker!
 #
 # subscription-manager register --username amurdaca@redhat.com --auto-attach
+# enable for docker:
 # subscription-manager repos --enable rhel-7-server-extras-rpms
+# enable for golang:
+# subscription-manager repos --enable=rhel-7-server-optional-rpms
 # yum update && yum install docker
 
 # XXX: get a list of os-variant(s): osinfo-query os
