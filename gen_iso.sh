@@ -9,9 +9,11 @@ EOF'
 
 sh -c 'cat >user-data <<-EOF
   #cloud-config
-  password: '$instanceid'
-  ssh_pwauth: True
+  user:
+    - name: root
   chpasswd:
+    list: |
+      root:'$instanceid'
     expire: False
 EOF'
 
