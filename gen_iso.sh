@@ -1,6 +1,6 @@
 #!/bin/sh
 
-instanceid=${1:-rhel72}
+instanceid=$1
 
 sh -c 'cat >meta-data <<-EOF
   instance-id: '$instanceid'
