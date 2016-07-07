@@ -78,7 +78,8 @@ case $os in
 		fi
 		is_available $name
 		check_root $name
-		case $name in
+		cp $path ./$name.qcow2
+		case $os in
 			rhel)
 				osvariant="rhel7.2"
 				;;
@@ -91,7 +92,7 @@ case $os in
 				;;
 		esac
 		./gen_iso.sh $1
-		virt-install --name $name --ram 2048 --vcpus=2 --disk path=$2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=init.iso,device=cdrom,readonly=on --import
+		virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=init.iso,device=cdrom,readonly=on --import
 		exit
 		;;
 	*)
