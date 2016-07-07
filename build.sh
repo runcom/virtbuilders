@@ -92,7 +92,7 @@ case $os in
 				;;
 		esac
 		./gen_iso.sh $1
-		virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=init.iso,device=cdrom,readonly=on --import
+		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=init.iso,device=cdrom,readonly=on --import
 		exit
 		;;
 	*)
