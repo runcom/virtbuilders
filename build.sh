@@ -21,10 +21,11 @@ check_root() {
 }
 
 name=${OSNAME:-$1}
+os=$1
 version=$2
 root_password=${PASSWORD:-$1}
 
-case $name in
+case $os in
 	ubuntu)
 		size=${SIZE:-32G}
 		is_available $name
