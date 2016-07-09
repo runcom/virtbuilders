@@ -9,6 +9,7 @@ EOF'
 
 sh -c 'cat >user-data <<-EOF
   #cloud-config
+  ssh_pwauth: True
   user:
     - name: root
   chpasswd:
