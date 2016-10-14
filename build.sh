@@ -70,7 +70,7 @@ case $os in
 				;;
 		esac
 		;;
-	rhel|"rhel-atomic"|"centos-atomic"|"fedora-atomic")
+	rhel|rawhide|"rhel-atomic"|"centos-atomic"|"fedora-atomic")
 		path=$2
 		if [ -z $path ]; then
 			echo "please provide a path to a qcow2 image"
@@ -80,6 +80,9 @@ case $os in
 		check_root $name
 		cp $path ./$name.qcow2
 		case $os in
+			rawhide)
+				osvariant="fedora22"
+				;;
 			rhel)
 				osvariant="rhel7.2"
 				;;
