@@ -78,7 +78,8 @@ case $os in
 		fi
 		is_available $name
 		check_root $name
-		cp $path ./$name.qcow2
+		mkdir $name
+		cp $path ./$name/$name.qcow2
 		case $os in
 			rawhide)
 				osvariant="fedora22"
@@ -94,8 +95,8 @@ case $os in
 				osvariant="rhel-atomic-7.1"
 				;;
 		esac
-		./gen_iso.sh $1
-		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=init.iso,device=cdrom,readonly=on --import --noreboot
+		./gen_iso.sh $1 $name
+		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on --import --noreboot
 		sudo virsh start $name
 		exit
 		;;

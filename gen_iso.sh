@@ -1,6 +1,7 @@
 #!/bin/sh
 
 instanceid=$1
+name=$2
 
 sh -c 'cat >meta-data <<-EOF
   instance-id: '$instanceid'
@@ -18,4 +19,4 @@ sh -c 'cat >user-data <<-EOF
     expire: False
 EOF'
 
-genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data
+genisoimage -output ./$name/init.iso -volid cidata -joliet -rock user-data meta-data
