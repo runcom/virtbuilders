@@ -1,4 +1,5 @@
 *.qcow2
+*.disk
 meta-data
 user-data
 init.iso
