@@ -2,6 +2,10 @@
 
 # using sudo so I can use virbr0 for nat...the default network does not work with unprivileged users :(
 
+# EXAMPLE:
+#
+# OSNAME=rhel73-1 ./build.sh rhel $HOME/qcows/rhel-guest-image-7.3-35.x86_64.qcow2
+
 is_available() {
 	available=( $(sudo virsh list --all --name) )
 	for i in "${available[@]}"
