@@ -30,50 +30,6 @@ version=$2
 root_password=${PASSWORD:-$1}
 
 case $os in
-	#ubuntu)
-		#size=${SIZE:-32G}
-		#is_available $name
-		#check_root $name
-		#ver=${UBUNTUVER:-14.04}
-		#dist="ubuntu-$ver"
-		## TODO: ubuntu16.04 doesn't exist into osinfo-query os for instance and doesn't start uff
-		#if [ "$ver" != "14.04" ]; then
-			#ver="15.10"
-		#fi
-		#osvariant="ubuntu$ver"
-		#;;
-	#fedora)
-		#case $version in
-			#23)
-				#size=${SIZE:-32G}
-				#is_available $name
-				#check_root $name
-				#dist="fedora-23"
-				## using fedora22 as os-variant becuse virt-install ins't updatd yet probably and errors out
-				#run="$RUN --run basic_fedora.sh"
-				#osvariant="fedora22"
-				#options="$OPTS --selinux-relabel"
-				#;;
-			#rawhide)
-				#size=${SIZE:-32G}
-				#is_available $name
-				#check_root $name
-				#dist="fedora-23"
-				## using fedora22 as os-variant becuse virt-install ins't updated yet probably and errors out
-				#osvariant="fedora22"
-				#run="$RUN --run basic_fedora.sh"
-				#run="$run --run rawhide/torawhide.sh"
-				#if [ -n "$STUFF" ]; then
-					#run="$run --run rawhide/stuff.sh"
-				#fi
-				#options="$OPTS --selinux-relabel"
-				#;;
-			#*)
-				#echo "version not supported"
-				#exit
-				#;;
-		#esac
-		#;;
 	rhel|rawhide|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic")
 		path=$2
 		if [ -z $path ]; then
