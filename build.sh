@@ -60,6 +60,7 @@ case $os in
 		# add disk, default 4G, remember to format it :)
 		qemu-img create -f raw "./$name/$name.disk" 4G
 		sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
+		sudo virt-customize -a $(pwd)/$name/$name.qcow2 --hostname $name.vm
 		# start it!
 		sudo virsh start $name
 		exit
