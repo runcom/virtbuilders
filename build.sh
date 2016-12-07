@@ -30,7 +30,7 @@ version=$2
 root_password=${PASSWORD:-$1}
 
 case $os in
-	rhel|rawhide|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic")
+	rhel|rawhide|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic"|fedora)
 		path=$2
 		if [ -z $path ]; then
 			echo "please provide a path to a qcow2 image"
@@ -42,6 +42,9 @@ case $os in
 		cp $path ./$name/$name.qcow2
 		case $os in
 			rawhide)
+				osvariant="fedora22"
+				;;
+			fedora)
 				osvariant="fedora22"
 				;;
 			rhel|centos)
