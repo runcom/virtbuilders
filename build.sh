@@ -61,9 +61,9 @@ case $os in
 		./gen_iso.sh $1 $name
 		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on --import --noreboot
 		# add disk, default 4G, remember to format it :)
-		qemu-img create -f raw "./$name/$name.disk" 4G
-		sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
-		sudo virt-customize -a $(pwd)/$name/$name.qcow2 --hostname $name.vm
+	       # qemu-img create -f raw "./$name/$name.disk" 4G
+		#sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
+	       # sudo virt-customize -a $(pwd)/$name/$name.qcow2 --hostname $name.vm
 		# start it!
 		sudo virsh start $name
 		exit
