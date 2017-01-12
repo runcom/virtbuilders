@@ -42,24 +42,24 @@ case $os in
 		cp $path ./$name/$name.qcow2
 		case $os in
 			rawhide)
-				osvariant="fedora22"
+				#osvariant="--os-variant fedora"
 				;;
 			fedora)
-				osvariant="fedora22"
+				#osvariant="--os-variant fedora"
 				;;
 			rhel|centos)
-				osvariant="rhel7.2"
+				#osvariant="rhel7.2"
 				;;
 			"rhel-atomic"|"centos-atomic")
-				osvariant="rhel-atomic-7.1"
+				#osvariant="--os-variant rhel-atomic-7.2"
 				;;
 			"fedora-atomic")
 				# TODO: fixme
-				osvariant="rhel-atomic-7.1"
+				#osvariant="--os-variant rhel-atomic-7.2"
 				;;
 		esac
 		./gen_iso.sh $1 $name
-		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics --os-variant $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on --import --noreboot
+		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on --import --noreboot
 		# add disk, default 4G, remember to format it :)
 	       # qemu-img create -f raw "./$name/$name.disk" 4G
 		#sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
