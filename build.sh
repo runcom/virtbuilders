@@ -25,6 +25,7 @@ check_root() {
 }
 
 name=${OSNAME:-$1}
+kernel=${KERNEL:-""}
 os=$1
 version=$2
 root_password=${PASSWORD:-$1}
@@ -40,26 +41,29 @@ case $os in
 		check_root $name
 		mkdir $name
 		cp $path ./$name/$name.qcow2
-		case $os in
-			rawhide)
-				#osvariant="--os-variant fedora"
-				;;
-			fedora)
-				#osvariant="--os-variant fedora"
-				;;
-			rhel|centos)
-				#osvariant="rhel7.2"
-				;;
-			"rhel-atomic"|"centos-atomic")
-				#osvariant="--os-variant rhel-atomic-7.2"
-				;;
-			"fedora-atomic")
-				# TODO: fixme
-				#osvariant="--os-variant rhel-atomic-7.2"
-				;;
-		esac
+		#case $os in
+			#rawhide)
+				##osvariant="--os-variant fedora"
+				#;;
+			#fedora)
+				##osvariant="--os-variant fedora"
+				#;;
+			#rhel|centos)
+				##osvariant="rhel7.2"
+				#;;
+			#"rhel-atomic"|"centos-atomic")
+				##osvariant="--os-variant rhel-atomic-7.2"
+				#;;
+			#"fedora-atomic")
+				## TODO: fixme
+				##osvariant="--os-variant rhel-atomic-7.2"
+				#;;
+		#esac
+		if [ ! -z $KERNEL ]; then
+			custom_kernel=( --boot kernel=$KERNEL,kernel_args='root=/dev/sda1 ro no_timer_check console=tty1 console=tty0 console=ttyS0,115200n8 console=ttS1 ds=nocloud-net' )
+		fi
 		./gen_iso.sh $1 $name
-		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on --import --noreboot
+		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on "${custom_kernel[@]}" --import --noreboot
 		# add disk, default 4G, remember to format it :)
 	       # qemu-img create -f raw "./$name/$name.disk" 4G
 		#sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
