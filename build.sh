@@ -5,6 +5,8 @@
 # EXAMPLE:
 #
 # OSNAME=rhel73-1 ./build.sh rhel $HOME/qcows/rhel-guest-image-7.3-35.x86_64.qcow2
+# OSNAME=rawhide-customk0 KERNEL=/home/amurdaca/koding/linux/arch/x86/boot/bzImage ./build.sh fedora $HOME/qcows/Fedora-Cloud-Base-Rawhide-20161126.n.0.x86_64.qcow2
+
 
 is_available() {
 	available=( $(sudo virsh list --all --name) )
