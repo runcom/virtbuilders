@@ -65,7 +65,8 @@ case $os in
 			custom_kernel=( --boot kernel=$KERNEL,kernel_args='root=/dev/sda1 ro no_timer_check console=tty1 console=tty0 console=ttyS0,115200n8 console=ttS1 ds=nocloud-net' )
 		fi
 		./gen_iso.sh $1 $name
-		sudo virt-install --name $name --ram 2048 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on "${custom_kernel[@]}" --import --noreboot
+		sudo qemu-img resize ./$name/$name.qcow2 +20G
+		sudo virt-install --name $name --ram 4096 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on "${custom_kernel[@]}" --import --noreboot
 		# add disk, default 4G, remember to format it :)
 	       # qemu-img create -f raw "./$name/$name.disk" 4G
 		#sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
