@@ -68,9 +68,8 @@ case $os in
 		sudo qemu-img resize ./$name/$name.qcow2 +20G
 		sudo virt-install --name $name --ram 4096 --vcpus=2 --disk path=./$name/$name.qcow2,format=qcow2,cache=writeback --nographics $osvariant --disk path=./$name/init.iso,device=cdrom,readonly=on "${custom_kernel[@]}" --import --noreboot
 		# add disk, default 4G, remember to format it :)
-	       # qemu-img create -f raw "./$name/$name.disk" 4G
-		#sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
-	       # sudo virt-customize -a $(pwd)/$name/$name.qcow2 --hostname $name.vm
+		qemu-img create -f raw "./$name/$name.disk" 4G
+		sudo virsh attach-disk $name --source "$(pwd)/$name/$name.disk" --target vdb --persistent
 		# start it!
 		sudo virsh start $name
 		exit
