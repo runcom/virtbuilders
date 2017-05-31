@@ -33,7 +33,7 @@ version=$2
 root_password=${PASSWORD:-$1}
 
 case $os in
-	rhel|rawhide|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic"|fedora)
+	rhel72|rhel73|rhel|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic"|fedora)
 		path=$2
 		if [ -z $path ]; then
 			echo "please provide a path to a qcow2 image"
@@ -43,24 +43,27 @@ case $os in
 		check_root $name
 		mkdir $name
 		cp $path ./$name/$name.qcow2
-		#case $os in
-			#rawhide)
-				##osvariant="--os-variant fedora"
-				#;;
-			#fedora)
-				##osvariant="--os-variant fedora"
-				#;;
-			#rhel|centos)
-				##osvariant="rhel7.2"
-				#;;
-			#"rhel-atomic"|"centos-atomic")
-				##osvariant="--os-variant rhel-atomic-7.2"
-				#;;
-			#"fedora-atomic")
-				## TODO: fixme
-				##osvariant="--os-variant rhel-atomic-7.2"
-				#;;
-		#esac
+		case $os in
+			fedora)
+				osvariant="--os-variant fedora"
+				;;
+			centos)
+				osvariant="--os-variant centos7.0"
+				;;
+			rhel72)
+				osvariant="--os-variant rhel7.2"
+				;;
+			rhel73)
+				osvariant="--os-variant rhel7.3"
+				;;
+			"rhel-atomic"|"centos-atomic")
+				osvariant="--os-variant rhel-atomic-7.2"
+				;;
+			"fedora-atomic")
+				# TODO: fixme
+				osvariant="--os-variant rhel-atomic-7.2"
+				;;
+		esac
 		if [ ! -z $KERNEL ]; then
 			custom_kernel=( --boot kernel=$KERNEL,kernel_args='root=/dev/sda1 ro no_timer_check console=tty1 console=tty0 console=ttyS0,115200n8 console=ttS1 ds=nocloud-net' )
 		fi
