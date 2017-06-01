@@ -33,7 +33,7 @@ version=$2
 root_password=${PASSWORD:-$1}
 
 case $os in
-	rhel72|rhel73|rhel|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic"|fedora)
+	ubuntu1604|rhel72|rhel73|rhel|centos|"rhel-atomic"|"centos-atomic"|"fedora-atomic"|fedora)
 		path=$2
 		if [ -z $path ]; then
 			echo "please provide a path to a qcow2 image"
@@ -44,6 +44,9 @@ case $os in
 		mkdir $name
 		cp $path ./$name/$name.qcow2
 		case $os in
+			ubuntu1604)
+				osvariant="--os-variant ubuntu16.04"
+				;;
 			fedora)
 				osvariant="--os-variant fedora"
 				;;
