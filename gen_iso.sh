@@ -17,6 +17,9 @@ sh -c 'cat >user-data <<-EOF
     list: |
       root:'$instanceid'
     expire: False
+  runcmd:
+    - sed -i -e "/^PermitRootLogin/s/^.*$/PermitRootLogin yes/" /etc/ssh/sshd_config
+    - systemctl reload sshd
 EOF'
 
 genisoimage -output ./$name/init.iso -volid cidata -joliet -rock user-data meta-data

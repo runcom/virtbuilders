@@ -48,7 +48,7 @@ case $os in
 				osvariant="--os-variant ubuntu16.04"
 				;;
 			fedora)
-				osvariant="--os-variant fedora"
+				osvariant="--os-variant fedora25"
 				;;
 			centos)
 				osvariant="--os-variant centos7.0"
