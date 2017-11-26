@@ -18,7 +18,7 @@ sh -c 'cat >user-data <<-EOF
       root:'$instanceid'
     expire: False
   runcmd:
-    - sed -i -e "/^PermitRootLogin/s/^.*$/PermitRootLogin yes/" /etc/ssh/sshd_config
+    - sed -i -e "/PermitRootLogin/s/^.*$/PermitRootLogin yes/" /etc/ssh/sshd_config
     - systemctl reload sshd
 EOF'
 
